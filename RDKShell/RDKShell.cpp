@@ -6014,7 +6014,7 @@ namespace WPEFramework {
             std::cout << "attempting to stop hdmi input...\n";
             JsonObject joStopHdmiParams;
             JsonObject joStopHdmiResult;
-            std::string stopHdmiInvoke = "org.rdk.HdmiInput.1.stopHdmiInput";
+            std::string stopHdmiInvoke = "org.rdk.AVInput.1.stopInput";
 
             std::cout << "attempting to stop hdmi input \n";
             uint32_t stopHdmiStatus = getThunderControllerClient()->Invoke<JsonObject, JsonObject>(RDKSHELL_THUNDER_TIMEOUT, stopHdmiInvoke.c_str(), joStopHdmiParams, joStopHdmiResult);
