@@ -6012,13 +6012,26 @@ namespace WPEFramework {
             destroyWrapper(destroyRequest, destroyResponse);
 
             std::cout << "attempting to stop hdmi input...\n";
+
+
+	    JsonObject joStatusParams;
+    	    JsonObject joStatusResult;
+    	    std::string statusInvoke = "Controller.1.status";
+
+    	    std::cout << "Checking activation status of AVInput plugin...\n";
+    	    uint32_t statusCheck = getThunderControllerClient()->Invoke<JsonObject, JsonObject>(RDKSHELL_THUNDER_TIMEOUT, statusInvoke.c_str(), joStatusParams, joStatusResult);
+
+	    std::cout << "statusCheck: " << statusCheck << std::endl;
+		
             JsonObject joStopHdmiParams;
             JsonObject joStopHdmiResult;
+	    joStopHdmiParams.typeOfInput = "HDMI";
             std::string stopHdmiInvoke = "org.rdk.AVInput.1.stopInput";
 
             std::cout << "attempting to stop hdmi input \n";
             uint32_t stopHdmiStatus = getThunderControllerClient()->Invoke<JsonObject, JsonObject>(RDKSHELL_THUNDER_TIMEOUT, stopHdmiInvoke.c_str(), joStopHdmiParams, joStopHdmiResult);
             std::cout << "stopHdmiStatus status: " << stopHdmiStatus << std::endl;
+	    std::cout << "joStopHdmiResult: " << joStopHdmiResult << std::endl;
 
             sForceResidentAppLaunch = true;
             string configString;
